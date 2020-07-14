@@ -3,7 +3,7 @@ package org.springtiny.test;
 /**
  * @author zlzhou
  */
-public class HelloWorldService {
+public class HelloWorldService implements HelloWorld{
 
     private HelloNioService helloNioService;
 
