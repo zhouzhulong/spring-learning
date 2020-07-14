@@ -5,6 +5,7 @@ package org.springtiny.test;
  */
 public class HelloWorldService {
 
+    private HelloNioService helloNioService;
 
     private String text;
 

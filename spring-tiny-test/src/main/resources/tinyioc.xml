@@ -10,6 +10,9 @@
 
     <bean name="helloWorldService" class="org.springtiny.test.HelloWorldService">
         <property name="text" value="Hello World!"></property>
+        <property name="helloNioService" ref="helloNioService"></property>
     </bean>
-
+    <bean name="helloNioService" class="org.springtiny.test.HelloNioService">
+        <property name="helloWorldService" ref="helloWorldService"></property>
+    </bean>
 </beans>

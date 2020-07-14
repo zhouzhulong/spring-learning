@@ -3,8 +3,8 @@ package org.springtiny.test.bean;
 import org.springtiny.beans.BeanDefinition;
 import org.springtiny.beans.PropertyValue;
 import org.springtiny.beans.PropertyValues;
+import org.springtiny.beans.factory.AbstractBeanFactory;
 import org.springtiny.beans.factory.AutowireCapableBeanFactory;
-import org.springtiny.beans.factory.BeanFactory;
 import org.springtiny.test.HelloWorldService;
 
 /**
@@ -15,7 +15,7 @@ public class BeanFactoryTest {
     public static void main(String[] args) throws Exception {
 
         //1. 初始化beanfactory
-        BeanFactory beanFactory = new AutowireCapableBeanFactory();
+        AbstractBeanFactory beanFactory = new AutowireCapableBeanFactory();
 
         //2. bean 定义
         BeanDefinition beanDefinition = new BeanDefinition();
