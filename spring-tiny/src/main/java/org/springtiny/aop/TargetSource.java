@@ -11,7 +11,7 @@ public class TargetSource {
 
     private Object target;
 
-    public TargetSource(Object target,Class targetClass) {
+    public TargetSource(Object target, Class targetClass) {
         this.targetClass = targetClass;
         this.target = target;
     }
