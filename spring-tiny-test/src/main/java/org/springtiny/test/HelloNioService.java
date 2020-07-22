@@ -3,12 +3,19 @@ package org.springtiny.test;
 /**
  * @author zlzhou
  */
-public class HelloNioService {
+public class HelloNioService implements HelloNio {
 
-    private HelloWorldService helloWorldService;
+    private HelloWorld helloWorldService;
 
     public void hello() {
-        helloWorldService.hello();
         System.out.println("hello NIO");
+    }
+
+    public HelloWorld getHelloWorldService() {
+        return helloWorldService;
+    }
+
+    public void setHelloWorldService(HelloWorld helloWorldService) {
+        this.helloWorldService = helloWorldService;
     }
 }

@@ -8,11 +8,20 @@
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-    <bean name="helloWorldService" class="org.springtiny.test.HelloWorldService">
+    <bean id="helloWorldService" class="org.springtiny.test.HelloWorldService">
         <property name="text" value="Hello World!"></property>
         <property name="helloNioService" ref="helloNioService"></property>
     </bean>
-    <bean name="helloNioService" class="org.springtiny.test.HelloNioService">
+    <bean id="helloNioService" class="org.springtiny.test.HelloNioService">
         <property name="helloWorldService" ref="helloWorldService"></property>
     </bean>
+    <bean id="timeInterceptor" class="org.springtiny.test.aop.TimeInterceptor"></bean>
+
+    <bean id="autoProxyCreator" class="org.springtiny.aop.AspectJAwareAdvisorAutoProxyCreator"></bean>
+
+    <bean id="aspectjAspect" class="org.springtiny.aop.AspectJExpressionPointcutAdvisor">
+        <property name="advice" ref="timeInterceptor"></property>
+        <property name="expression" value="execution(* org.springtiny.test.*.*(..))"></property>
+    </bean>
+
 </beans>

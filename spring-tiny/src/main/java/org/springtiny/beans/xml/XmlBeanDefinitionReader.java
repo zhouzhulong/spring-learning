@@ -1,8 +1,8 @@
 package org.springtiny.beans.xml;
 
+import org.springtiny.BeanReference;
 import org.springtiny.beans.AbstractBeanDefinitionReader;
 import org.springtiny.beans.BeanDefinition;
-import org.springtiny.BeanReference;
 import org.springtiny.beans.PropertyValue;
 import org.springtiny.beans.io.ResourceLoader;
 import org.w3c.dom.Document;
@@ -15,7 +15,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.InputStream;
 
 /**
- * @author zlzhou
+ * @author yihua.huang@dianping.com
  */
 public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
@@ -31,14 +31,16 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
     protected void doLoadBeanDefinitions(InputStream inputStream) throws Exception {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder documentBuilder = factory.newDocumentBuilder();
-        Document document = documentBuilder.parse(inputStream);
-        registerBeanDefinitions(document);
+        DocumentBuilder docBuilder = factory.newDocumentBuilder();
+        Document doc = docBuilder.parse(inputStream);
+        // 解析bean
+        registerBeanDefinitions(doc);
         inputStream.close();
     }
 
-    public void registerBeanDefinitions(Document document) {
-        Element root = document.getDocumentElement();
+    public void registerBeanDefinitions(Document doc) {
+        Element root = doc.getDocumentElement();
+
         parseBeanDefinitions(root);
     }
 
@@ -47,23 +49,23 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         for (int i = 0; i < nl.getLength(); i++) {
             Node node = nl.item(i);
             if (node instanceof Element) {
-                Element element = (Element) node;
-                processBeanDefinition(element);
+                Element ele = (Element) node;
+                processBeanDefinition(ele);
             }
         }
     }
 
-    protected void processBeanDefinition(Element element) {
-        String name = element.getAttribute("name");
-        String className = element.getAttribute("class");
+    protected void processBeanDefinition(Element ele) {
+        String name = ele.getAttribute("id");
+        String className = ele.getAttribute("class");
         BeanDefinition beanDefinition = new BeanDefinition();
-        processProperty(element, beanDefinition);
+        processProperty(ele, beanDefinition);
         beanDefinition.setBeanClassName(className);
         getRegistry().put(name, beanDefinition);
     }
 
-    private void processProperty(Element element, BeanDefinition beanDefinition) {
-        NodeList propertyNode = element.getElementsByTagName("property");
+    private void processProperty(Element ele, BeanDefinition beanDefinition) {
+        NodeList propertyNode = ele.getElementsByTagName("property");
         for (int i = 0; i < propertyNode.getLength(); i++) {
             Node node = propertyNode.item(i);
             if (node instanceof Element) {

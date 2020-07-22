@@ -1,4 +1,4 @@
-package org.springtiny.test;
+package org.springtiny.test.aop;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
@@ -6,8 +6,7 @@ import org.aopalliance.intercept.MethodInvocation;
 /**
  * @author zlzhou
  */
-public class TimerInterceptor implements MethodInterceptor {
-
+public class TimeInterceptor implements MethodInterceptor {
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
         long time = System.nanoTime();
